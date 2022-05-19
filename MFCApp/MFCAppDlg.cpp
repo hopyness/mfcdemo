@@ -7,7 +7,8 @@
 #include "MFCApp.h"
 #include "MFCAppDlg.h"
 #include "afxdialogex.h"
-
+#include "DlgSetA.h"
+#include "DlgLobby.h"
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -161,22 +162,43 @@ void CMFCAppDlg::OnBnClickedButton2()
 {
 	// TODO: 在此添加控件通知处理程序代码
 	//this->GetDlgItem(资源id号)获取CWind*,然后操作
+
+	CDlgSetA dlg;
+	
+	INT_PTR nResponse = dlg.DoModal();
+	if (nResponse == IDOK)
+	{
+		// TODO: 在此放置处理何时用
+		//  “确定”来关闭对话框的代码
+	
 	CButton* p1 = (CButton*)GetDlgItem(IDC_BUTTON2);
 	//IDC_BUTTON2
+
 	p1->EnableWindow(0);
 	p1->SetWindowTextW(L"连接成功");
 	CButton* p2 = (CButton*)GetDlgItem(IDC_BUTTON3);
 	p2->EnableWindow(1);
+	}
+	
 	
 }
 
 
-//登录成功   
+//登录成功     
 void CMFCAppDlg::OnBnClickedButton3()
 {
 	// TODO: 在此添加控件通知处理程序代码
+	// 隐藏当前
 	//创建大厅   
 	//初始化大厅 
 	//显示大厅
+	ShowWindow(SW_HIDE);
+	
+	//ModifyStyleEx(WS_EX_APPWINDOW, WS_EX_TOOLWINDOW, 0);
+	
+	//SetWindowPos(NULL,0,0,0,0,SWP_NOMOVE);
+	auto m_pimmodelDlg = new CDlgLobby();//指向一个非模对话框示例
+	m_pimmodelDlg->Create(IDD_LOBBY, this);//创建
+	m_pimmodelDlg->ShowWindow(SW_SHOW);//显示
 
 }
